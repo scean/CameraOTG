@@ -21,22 +21,25 @@
  *  may have a different license, see the respective files.
  */
 
-package com.serenegiant.usbcameratest4;
+package com.serenegiant.otgUI;
 
 import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
@@ -44,6 +47,7 @@ import android.widget.ToggleButton;
 
 import com.serenegiant.common.BaseFragment;
 import com.serenegiant.encoder.MediaMuxerWrapper;
+import com.serenegiant.service.FlowWindowService;
 import com.serenegiant.service.UVCService;
 import com.serenegiant.serviceclient.CameraClient;
 import com.serenegiant.serviceclient.ICameraClient;
@@ -95,6 +99,9 @@ public class CameraFragment extends BaseFragment {
 			final List<DeviceFilter> filters = DeviceFilter.getDeviceFilters(getActivity(), R.xml.device_filter);
 			mUSBMonitor.setDeviceFilter(filters);
 		}
+
+        final Intent intent = new Intent(getActivity(), FlowWindowService.class);
+        getActivity().startService(intent);
 	}
 
 	@Override
@@ -118,6 +125,7 @@ public class CameraFragment extends BaseFragment {
 		mCameraView.setAspectRatio(DEFAULT_WIDTH / (float)DEFAULT_HEIGHT);
 		mCameraViewSub = (SurfaceView)rootView.findViewById(R.id.camera_view_sub);
 		mCameraViewSub.setOnClickListener(mOnClickListener);
+        initWindowParams();
 		return rootView;
 	}
 
@@ -244,6 +252,9 @@ public class CameraFragment extends BaseFragment {
 			if (DEBUG) Log.v(TAG, "onConnect:");
 			mCameraClient.addSurface(mCameraView.getSurface(), false);
 			mCameraClient.addSurface(mCameraViewSub.getHolder().getSurface(), false);
+			//add for test
+            addWindowView2Window();
+			//end
 			isSubView = true;
 			enableButtons(true);
 			setPreviewButton(true);
@@ -257,6 +268,7 @@ public class CameraFragment extends BaseFragment {
 			if (DEBUG) Log.v(TAG, "onDisconnect:");
 			setPreviewButton(false);
 			enableButtons(false);
+            removeWindowView2Window();
 		}
 
 	};
@@ -383,4 +395,62 @@ public class CameraFragment extends BaseFragment {
 			}
 		});
 	}
+
+	//test for windowsManager add view>>>>>>>>>>>>>>>>>>>
+
+	private WindowManager.LayoutParams wmParams;
+	private WindowManager mWindowManager;
+	private View mWindowView;
+	private SurfaceView mCameraViewSub2;
+
+	private void initWindowParams() {
+        if (1==1) return;
+        mWindowManager = (WindowManager) getActivity().getApplication().getSystemService(getActivity().getApplication().WINDOW_SERVICE);
+		wmParams = new WindowManager.LayoutParams();
+		wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+		wmParams.format = PixelFormat.TRANSLUCENT;
+		wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+		wmParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+		wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+		wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        mWindowView = LayoutInflater.from(getActivity().getApplication()).inflate(R.layout.test_fragment_main, null);
+        mCameraViewSub2 = (SurfaceView)mWindowView.findViewById(R.id.camera_view_sub2);
+        mWindowManager.addView(mWindowView, wmParams);
+        mWindowView.setVisibility(View.GONE);
+    }
+
+
+	private void addWindowView2Window() {
+        if (1==1) return;
+        mCameraClient.addSurface(mCameraViewSub2.getHolder().getSurface(), false);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mWindowView.setVisibility(View.VISIBLE);
+            }
+        },0);
+
+	}
+
+    private void removeWindowView2Window() {
+       if (1==1) return;
+        try {
+            mCameraClient.removeSurface(mCameraViewSub2.getHolder().getSurface());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                try {
+//                    mWindowManager.removeView(mWindowView);
+//
+//                }catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+                mWindowView.setVisibility(View.GONE);
+            }
+        },0);
+    }
+	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<end
 }

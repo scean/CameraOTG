@@ -21,15 +21,16 @@
  *  may have a different license, see the respective files.
  */
 
-package com.serenegiant.usbcameratest4;
+package com.serenegiant.otgUI;
 
-import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
 import com.serenegiant.common.BaseActivity;
+import com.serenegiant.service.FlowWindowService;
 
 public class MainActivity extends BaseActivity {
 	private static final boolean DEBUG = false;
@@ -40,12 +41,15 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		if (savedInstanceState == null) {
-			if (DEBUG) Log.i(TAG, "onCreate:new");
-			final Fragment fragment = new CameraFragment();
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, fragment).commit();
-		}
+//		if (savedInstanceState == null) {
+//			if (DEBUG) Log.i(TAG, "onCreate:new");
+//			final Fragment fragment = new CameraFragment();
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.container, fragment).commit();
+//		}
+
+		final Intent intent = new Intent(MainActivity.this, FlowWindowService.class);
+		MainActivity.this.startService(intent);
 	}
 
 	@Override

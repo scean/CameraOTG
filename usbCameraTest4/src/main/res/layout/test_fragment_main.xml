@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~  UVCCamera
   ~  library and sample to access to UVC web camera on non-rooted Android device
@@ -21,6 +20,26 @@
   ~  Files in the libjpeg-turbo, libusb, libuvc, rapidjson folder
   ~  may have a different license, see the respective files.
   -->
-<resources>
-    <string name="app_name">OTG Demo</string>
-</resources>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout2"
+    android:layout_width="350dp"
+    android:layout_height="300dp"
+    android:layout_margin="0dp"
+    android:paddingBottom="@dimen/vertical_margin"
+    android:paddingLeft="@dimen/horizontal_margin"
+    android:paddingRight="@dimen/horizontal_margin"
+    android:paddingTop="@dimen/vertical_margin"
+     >
+
+
+    <SurfaceView
+        android:id="@+id/camera_view_sub2"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp" />
+
+
+</RelativeLayout>

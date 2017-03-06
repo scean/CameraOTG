@@ -38,8 +38,8 @@ import com.serenegiant.common.BaseService;
 import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.USBMonitor.OnDeviceConnectListener;
 import com.serenegiant.usb.USBMonitor.UsbControlBlock;
-import com.serenegiant.usbcameratest4.MainActivity;
-import com.serenegiant.usbcameratest4.R;
+import com.serenegiant.otgUI.MainActivity;
+import com.serenegiant.otgUI.R;
 
 public class UVCService extends BaseService {
 	private static final boolean DEBUG = true;

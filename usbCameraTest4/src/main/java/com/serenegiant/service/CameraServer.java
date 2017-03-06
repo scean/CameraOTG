@@ -50,7 +50,7 @@ import com.serenegiant.glutils.RendererHolder;
 import com.serenegiant.usb.USBMonitor.UsbControlBlock;
 import com.serenegiant.usb.Size;
 import com.serenegiant.usb.UVCCamera;
-import com.serenegiant.usbcameratest4.R;
+import com.serenegiant.otgUI.R;
 
 public final class CameraServer extends Handler {
 	private static final boolean DEBUG = true;
