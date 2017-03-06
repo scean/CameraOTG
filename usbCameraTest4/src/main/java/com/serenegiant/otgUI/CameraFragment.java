@@ -59,7 +59,7 @@ import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.USBMonitor.OnDeviceConnectListener;
 import com.serenegiant.usb.USBMonitor.UsbControlBlock;
 import com.serenegiant.widget.CameraViewInterface;
-
+import com.doorcamera.smileui.R;
 public class CameraFragment extends BaseFragment {
 
 	private static final boolean DEBUG = true;

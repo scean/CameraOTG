@@ -31,6 +31,7 @@ import android.view.Window;
 
 import com.serenegiant.common.BaseActivity;
 import com.serenegiant.service.FlowWindowService;
+import com.doorcamera.smileui.R;
 
 public class MainActivity extends BaseActivity {
 	private static final boolean DEBUG = false;

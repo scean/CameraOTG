@@ -33,7 +33,7 @@ android {
 	}
 
     defaultConfig {
-        applicationId "com.serenegiant.otgUI"
+        applicationId "com.doorcamera.smileui"
         minSdkVersion 18
 		targetSdkVersion versionTarget
 		versionCode 9

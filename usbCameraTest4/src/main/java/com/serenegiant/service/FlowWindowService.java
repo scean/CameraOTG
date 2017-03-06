@@ -18,7 +18,7 @@ import com.serenegiant.serviceclient.ICameraClient;
 import com.serenegiant.serviceclient.ICameraClientCallback;
 import com.serenegiant.usb.DeviceFilter;
 import com.serenegiant.usb.USBMonitor;
-import com.serenegiant.otgUI.R;
+import com.doorcamera.smileui.R;
 
 import java.util.List;
 

@@ -22,6 +22,6 @@
   ~  may have a different license, see the respective files.
   -->
 <resources>
-    <string name="app_name">OTG Demo</string>
+    <string name="app_name">door-camera</string>
     <string name="camera_notice">温馨提示:您有来访客人！ \n Reminder:Visitor at the door</string>
 </resources>
