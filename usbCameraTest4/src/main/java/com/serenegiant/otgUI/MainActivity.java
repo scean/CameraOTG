@@ -25,6 +25,8 @@ package com.serenegiant.otgUI;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -40,8 +42,8 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_main);
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		setContentView(R.layout.activity_main);
 //		if (savedInstanceState == null) {
 //			if (DEBUG) Log.i(TAG, "onCreate:new");
 //			final Fragment fragment = new CameraFragment();
@@ -51,26 +53,27 @@ public class MainActivity extends BaseActivity {
 
 		final Intent intent = new Intent(MainActivity.this, FlowWindowService.class);
 		MainActivity.this.startService(intent);
+		this.finish();
 	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (DEBUG) Log.v(TAG, "onResume:");
-//		updateScreenRotation();
-	}
-
-	@Override
-	protected void onPause() {
-		if (DEBUG) Log.v(TAG, "onPause:isFinishing=" + isFinishing());
-		super.onPause();
-	}
-
-	@Override
-	protected void onDestroy() {
-		if (DEBUG) Log.v(TAG, "onDestroy:");
-		super.onDestroy();
-	}
+//
+//	@Override
+//	protected void onResume() {
+//		super.onResume();
+//		if (DEBUG) Log.v(TAG, "onResume:");
+////		updateScreenRotation();
+//	}
+//
+//	@Override
+//	protected void onPause() {
+//		if (DEBUG) Log.v(TAG, "onPause:isFinishing=" + isFinishing());
+//		super.onPause();
+//	}
+//
+//	@Override
+//	protected void onDestroy() {
+//		if (DEBUG) Log.v(TAG, "onDestroy:");
+//		super.onDestroy();
+//	}
 
 	protected final void updateScreenRotation() {
         final int screenRotation = 2;
